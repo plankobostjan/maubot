@@ -1,0 +1,21 @@
+# This is the systemd service file for the maubot
+# It allows you to run the bot as a system service
+
+[Unit]
+Description=maubot
+
+[Service]
+# change working directory to suit your needs
+WorkingDirectory=/home/mau/maubot
+# change user name to fit your needs
+User=maubot
+Group=maubot
+Environment=PYTHONUNBUFFERED=1
+# change this PATH to match your PATH
+ExecStart=/home/maubot/maubot/bin/python -m maubot
+ExecStop=/bin/kill -9 $MAINPID
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
